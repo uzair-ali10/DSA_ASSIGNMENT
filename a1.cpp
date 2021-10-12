@@ -51,23 +51,20 @@ void insertStudent(int roll, string name, int cgpa, int branchID, int university
 	}
 }
 
-bool isUniqueStu(int new_roll)
+bool isUniqueStu(int in_roll)
 {
-	if(stu_head==NULL)
-	{
-		return false;
-	}
-
-	Student* temp = new Student();
+	Student *temp = new Student();
 	temp = stu_head;
+
 	while(temp!=NULL)
 	{
-		if(temp->rollNO == new_roll)
+		if(temp->rollNO == in_roll)
 		{
 			return false;
 		}
 		temp = temp->nextStudent;
-	} 
+	}
+	return true;
 }
 
 void insertUniversity(int uid, string uname, string uloc, int yr)
