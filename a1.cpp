@@ -463,6 +463,46 @@ void convertBranch() {
     }
 }
 
+void display_substring(){
+    string x;
+    cout<<"enter the substring you want to search"<<endl;
+    cin>>x;
+    cout<<"Names and Universities where "<<x<<" substring is present are"<<endl;
+    Student*temp1=stu_head;
+    University*temp2=univ_head;
+    
+    cout<<"Student List"<<endl;
+    while(temp1!=NULL){
+        for(int i=0;i<temp1->name.length();i++){
+            for(int j=0;j<x.length();j++){
+                if(temp1->name[i+j]!=x[j]){
+                    break;
+                }
+                if(j==x.length()){
+                    cout<<temp1->name<<endl;
+                }
+                
+            }
+        }
+        temp1=temp1->nextStudent;
+    }
+    cout<<"University List"<<endl;
+    while(temp2!=NULL){
+        for(int i=0;i<temp2->univName.length();i++){
+            for(int j=0;j<x.length();j++){
+                if(temp2->univName[i+j]!=x[j]){
+                    break;
+                }
+                if(j==x.length()){
+                    cout<<temp2->univName<<endl;
+                }
+                
+            }
+        }
+       temp2=temp2->nextUniversity;
+    }
+    
+}
 // Main Function
 
 int main() {
@@ -473,7 +513,7 @@ int main() {
 
 while(true) 
 {
-	cout<<"Wlcm to Student Record management!!!\nEnter 1 to create a new Student Record\nEnter 2 to create a new University Record\nEnter 3 to create a new Branch Record\nEnter 4 to Display the whole Student DB\nEnter 5 to Display the whole University DB\nEnter 6 to Display the whole Branch DB\nEnter 7 to Display the student list reading at KIIT University\nEnter 8 to Display the student list reading at KIIT University with CSE branch\nEnter 9 to Display all the branches in a University\nEnter 10 to Update an Existing Student Record\nEnter 11 to Update an Existing Branch Record\nEnter 12 to update an existing University Record\n";
+	cout<<"Wlcm to Student Record management!!!\nEnter 1 to create a new Student Record\nEnter 2 to create a new University Record\nEnter 3 to create a new Branch Record\nEnter 4 to Display the whole Student DB\nEnter 5 to Display the whole University DB\nEnter 6 to Display the whole Branch DB\nEnter 7 to Display the student list reading at KIIT University\nEnter 8 to Display the student list reading at KIIT University with CSE branch\nEnter 9 to Display all the branches in a University\nEnter 10 to Update an Existing Student Record\nEnter 11 to Update an Existing Branch Record\nEnter 12 to update an existing University Record\nEnter 13 to  Display the all Student name/ all University name for a given name substring\n";
 	cout<<"Enter Your Choice"<<endl;
 	int choice;
 
@@ -591,6 +631,10 @@ while(true)
 	else if(choice==12)
 	{
 		updateUniv();
+	}
+	else if(choice==13)
+	{
+		display_substring();
 	}
 }
 	return 0;
