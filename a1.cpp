@@ -92,6 +92,119 @@ void insertBranch(int bid, string bname, int uid)
 	}
 }
 
+// Functions to Update Records
+
+void updateStudent()
+{
+	int in_roll;
+	cout<<"Enter Rool No of the Student whose data is to be modified: "<<endl;
+	cin>>in_roll;
+
+	Student* temp = new Student();
+	temp = stu_head;
+
+	while(temp!=NULL)
+	{
+		if(temp->rollNO == in_roll)
+		{
+			int new_cgpa;
+			cout<<"Enter New CGPA: "<<endl;
+			cin >>new_cgpa;
+
+			int new_bid;
+			cout<<"Enter New Branch ID: "<<endl;
+			cin>>new_bid;
+
+			string new_name;
+			cout<<"Enter new Name: "<<endl;
+			cin>>new_name;
+
+			int  new_univid;
+			cout<<"Enter new University ID: "<<endl;
+			cin>>new_univid;
+
+			temp->name = new_name;
+			temp->CGPA = new_cgpa;
+			temp->branchID = new_bid;
+			temp->univID = new_univid;
+
+			return;
+		}
+		temp = temp->nextStudent;
+	}
+	cout<<"No Such Student found!!"<<endl;
+	return;
+}
+
+void updateBranch()
+{
+	int in_bid;
+	cout<<"Enter Branch ID of the Branch whose data is to be modified: "<<endl;
+	cin>>in_bid;
+
+	Branch* temp = new Branch();
+	temp = branch_head;
+
+	while(temp!=NULL)
+	{
+		if(temp->branchID == in_bid)
+		{
+			string new_bname;
+			cout<<"Enter new Branch Name: "<<endl;
+			cin>> new_bname;
+			
+			int new_uid;
+			cout<<"Enter new University ID: "<<endl;
+			cin>>new_uid;
+
+			temp->branchName = new_bname;
+			temp->univID = new_uid;
+
+			return;
+		}
+		temp = temp->nextBranch;
+	}
+	cout<<"No Such Branch found!!"<<endl;
+	return;
+}
+
+void updateUniv()
+{
+	int new_uid;
+	cout<<"Enter University ID of the University whose data is to be modified: "<<endl;
+	cin>>new_uid;
+
+	University* temp = new University();
+	temp = univ_head;
+
+	while(temp!=NULL)
+	{
+		if(temp->univID == new_uid)
+		{
+			string new_uname;
+			cout<<"Enter new university name: "<<endl;
+			cin>>new_uname;
+
+			string new_loc;
+			cout<<"Enter new location: "<<endl;
+			cin>>new_loc;
+
+			int new_yr;
+			cout<<"Enter new Founding Year: "<<endl;
+			cin>>new_yr;
+
+			temp->univName = new_uname;
+			temp->univLocation = new_loc;
+			temp->foundingYear = new_yr;
+
+			return;
+		}
+		temp = temp->nextUniversity;
+	}
+	cout<<"No Such University found!!"<<endl;
+	return;
+}
+
 // Function To Check Uniqueness of IDs Below
 
 bool isUniqueStu(int in_roll)
@@ -360,7 +473,7 @@ int main() {
 
 while(true) 
 {
-	cout<<"Wlcm to Student Record management!!!\nEnter 1 to create a new Student Record\nEnter 2 to create a new University Record\nEnter 3 to create a new Branch Record\nEnter 4 to Display the whole Student DB\nEnter 5 to Display the whole University DB\nEnter 6 to Display the whole Branch DB\nEnter 7 to Display the student list reading at KIIT University\nEnter 8 to Display the student list reading at KIIT University with CSE branch\nEnter 9 to Display all the branches in a University\n";
+	cout<<"Wlcm to Student Record management!!!\nEnter 1 to create a new Student Record\nEnter 2 to create a new University Record\nEnter 3 to create a new Branch Record\nEnter 4 to Display the whole Student DB\nEnter 5 to Display the whole University DB\nEnter 6 to Display the whole Branch DB\nEnter 7 to Display the student list reading at KIIT University\nEnter 8 to Display the student list reading at KIIT University with CSE branch\nEnter 9 to Display all the branches in a University\nEnter 10 to Update an Existing Student Record\nEnter 11 to Update an Existing Branch Record\nEnter 12 to update an existing University Record\n";
 	cout<<"Enter Your Choice"<<endl;
 	int choice;
 
@@ -466,6 +579,18 @@ while(true)
 	else if(choice==9)
 	{
 		displayBranches();
+	}
+	else if(choice==10)
+	{
+		updateStudent();
+	}
+	else if(choice==11)
+	{
+		updateBranch();
+	}
+	else if(choice==12)
+	{
+		updateUniv();
 	}
 }
 	return 0;
