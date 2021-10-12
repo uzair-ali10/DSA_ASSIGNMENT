@@ -214,9 +214,9 @@ void displayUniversityDB()
 		cout<<"University Name: "<<temp->univName<<endl;
 		cout<<"University Location: "<<temp->univLocation<<endl;
 		cout<<"University's Founding Year: "<<temp->foundingYear<<endl;
-		temp = temp->nextUniversity;
 		cout<<endl;
-	}	
+		temp = temp->nextUniversity;
+	}
 }
 
 void displayBranchDB()
@@ -232,8 +232,8 @@ void displayBranchDB()
 		cout<<"Branch ID: "<<temp->branchID<<endl;
 		cout<<"Branch Name: "<<temp->branchName<<endl;
 		cout<<"Associated University's ID: "<<temp->univID<<endl;
-		temp = temp->nextBranch;
 		cout<<endl;
+		temp = temp->nextBranch;
 	}
 }
 
@@ -288,6 +288,29 @@ void diplay_KiitStudentCse(){
     }
 }
 
+void displayBranches()
+{
+	int in_uid;
+	cout<<"Enter University's ID: "<<endl;
+	cin>>in_uid;
+
+	Branch* temp = new Branch();
+	temp = branch_head;
+	cout<<"All The Branches in the given University are: "<<endl;
+	cout<<endl;
+	while(temp!=NULL)
+	{
+		if(temp->univID == in_uid)
+		{
+			cout<<"Branch ID: "<<temp->branchID<<endl;
+			cout<<"Branch Name: "<<temp->branchName<<endl;
+			cout<<"University ID: "<<temp->univID<<endl;
+			cout<<endl;
+		}
+		temp = temp->nextBranch;
+	}
+}
+
 
 // Function to change all inputs to capital
 
@@ -322,7 +345,7 @@ int main() {
 
 while(true) 
 {
-	cout<<"Wlcm to Student Record management!!!\nEnter 1 to create a new Student Record\nEnter 2 to create a new University Record\nEnter 3 to create a new Branch Record\nEnter 4 to Display the whole Student DB\nEnter 5 to Display the whole University DB\nEnter 6 to Display the whole Branch DB\nEnter 7 to Display the student list reading at KIIT University\nEnter 8 to Display the student list reading at KIIT University with CSE branch\n";
+	cout<<"Wlcm to Student Record management!!!\nEnter 1 to create a new Student Record\nEnter 2 to create a new University Record\nEnter 3 to create a new Branch Record\nEnter 4 to Display the whole Student DB\nEnter 5 to Display the whole University DB\nEnter 6 to Display the whole Branch DB\nEnter 7 to Display the student list reading at KIIT University\nEnter 8 to Display the student list reading at KIIT University with CSE branch\nEnter 9 to Display all the branches in a University\n";
 	cout<<"Enter Your Choice"<<endl;
 	int choice;
 
@@ -424,6 +447,10 @@ while(true)
 	else if(choice==8)
 	{
 		diplay_KiitStudentCse();
+	}
+	else if(choice==9)
+	{
+		displayBranches();
 	}
 }
 	return 0;
