@@ -1,6 +1,4 @@
-#include <iostream>
-#include <string>
- 
+#include <bits/stdc++.h> 
 using namespace std;
 
 // Classes below
@@ -260,6 +258,36 @@ cout<<"List of students reading in KIIT University are "<<endl;
     }
 }
 
+void diplay_KiitStudentCse(){
+    Student *temp1=stu_head;
+    University *temp2=univ_head;
+    Branch *temp3=branch_head;
+    
+    while(temp2!=NULL){
+        if(temp2->univName=="KIIT University"){
+            break;
+        }
+        temp2=temp2->nextUniversity;
+    }
+    
+    while(temp3!=NULL){
+        if(temp3->branchName=="CSE"){
+            break;
+        }
+        temp3=temp3->nextBranch;
+    }
+    
+    cout<<"List of students reading in KIIT University with CSE branch are "<<endl;
+    
+    
+    while(temp1!=NULL){
+        if(temp1->univID==temp2->univID&&temp1->branchID==temp3->branchID){
+            cout<<temp1->name<<endl;
+        }
+        temp1=temp1->nextStudent;
+    }
+}
+
 // Main Function
 
 int main() {
@@ -270,7 +298,7 @@ int main() {
 
 while(true) 
 {
-	cout<<"Wlcm to Student Record management!!!\nEnter 1 to create a new Student Record\nEnter 2 to create a new University Record\nEnter 3 to create a new Branch Record\nEnter 4 to Display the whole Student DB\nEnter 5 to Display the whole University DB\nEnter 6 to Display the whole Branch DB\nEnter 7 to Display the student list reading at KIIT University\n";
+	cout<<"Wlcm to Student Record management!!!\nEnter 1 to create a new Student Record\nEnter 2 to create a new University Record\nEnter 3 to create a new Branch Record\nEnter 4 to Display the whole Student DB\nEnter 5 to Display the whole University DB\nEnter 6 to Display the whole Branch DB\nEnter 7 to Display the student list reading at KIIT University\nEnter 8 to Display the student list reading at KIIT University with CSE branch\n";
 	cout<<"Enter Your Choice"<<endl;
 	int choice;
 
@@ -365,6 +393,10 @@ while(true)
     else if(choice==7)
 	{
 		display_studentAtKiit();
+	}
+	else if(choice==8)
+	{
+		diplay_KiitStudentCse();
 	}
 }
 	return 0;
