@@ -1,6 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// Classes below
+
 class Student {
 public:
 	string name;
@@ -32,6 +34,8 @@ Student *stu_head = NULL;
 University *univ_head = NULL;
 Branch *branch_head = NULL;
 
+// Functions to Insert Records Below
+
 void insertStudent(int roll, string name, int cgpa, int branchID, int universityID)
 {
 	Student* t = new Student();
@@ -49,22 +53,6 @@ void insertStudent(int roll, string name, int cgpa, int branchID, int university
 		t->nextStudent = stu_head;
 		stu_head = t;
 	}
-}
-
-bool isUniqueStu(int in_roll)
-{
-	Student *temp = new Student();
-	temp = stu_head;
-
-	while(temp!=NULL)
-	{
-		if(temp->rollNO == in_roll)
-		{
-			return false;
-		}
-		temp = temp->nextStudent;
-	}
-	return true;
 }
 
 void insertUniversity(int uid, string uname, string uloc, int yr)
@@ -104,6 +92,153 @@ void insertBranch(int bid, string bname, int uid)
 	}
 }
 
+// Function To Check Uniqueness of IDs Below
+
+bool isUniqueStu(int in_roll)
+{
+	Student *temp = new Student();
+	temp = stu_head;
+
+	while(temp!=NULL)
+	{
+		if(temp->rollNO == in_roll)
+		{
+			return false;
+		}
+		temp = temp->nextStudent;
+	}
+	return true;
+}
+
+bool isUniqueUniv(int univ_id)
+{
+	University *temp = new University();
+	temp = univ_head;
+
+	while(temp!=NULL)
+	{
+		if(temp->univID == univ_id)
+		{
+			return false;
+		}
+		temp = temp->nextUniversity;
+	}
+
+	return true;
+}
+
+bool isUniqueBranch(int b_id)
+{
+	Branch *temp = new Branch();
+	temp = branch_head;
+
+	while(temp!=NULL)
+	{
+		if(temp->branchID == b_id)
+		{
+			return false;
+		}
+		temp = temp->nextBranch;
+	}
+	return true;
+}
+
+// Function To check Avaliblity of University and Branch IDs Below
+
+bool isUnivIDAvailable(int u_id)
+{
+	University *temp = new University();
+	temp = univ_head;
+
+	while(temp!=NULL)
+	{
+		if(temp->univID == u_id)
+		{
+			return true;
+		}
+		temp = temp->nextUniversity;
+	}
+	return false;
+}
+
+bool isBranchIDAvailable(int b_id)
+{
+	Branch *temp = new Branch();
+	temp = branch_head;
+
+	while(temp!=NULL)
+	{
+		if(temp->branchID == b_id)
+		{
+			return true;
+		}
+		temp = temp->nextBranch;
+	}
+
+	return false;
+}
+
+// Functions To Display Entire DB below
+
+void displayStudentDB()
+{
+	Student* temp = new Student();
+	temp = stu_head;
+	cout<<endl;
+	cout<<"All Students Listed in DB are as follows:  "<<endl;
+	cout<<endl;
+
+	while(temp!=NULL)
+	{
+		cout<<"Name: "<<temp->name<<endl;
+		cout<<"Roll No: "<<temp->name<<endl;
+		cout<<"CGPA: "<<temp->CGPA<<endl;
+		cout<<"Branch ID: "<<temp->branchID<<endl;
+		cout<<"University ID: "<<temp->univID<<endl;
+		temp = temp->nextStudent;
+		cout<<endl;
+	}
+}
+
+void displayUniversityDB()
+{
+	University* temp = new University();
+	temp = univ_head;
+	cout<<endl;
+	cout<<"All University Listed in DB are as follows:  "<<endl;
+	cout<<endl;
+
+	while(temp!=NULL)
+	{
+		cout<<"University ID: "<<temp->univID<<endl;
+		cout<<"University Name: "<<temp->univName<<endl;
+		cout<<"University Location: "<<temp->univLocation<<endl;
+		cout<<"University's Founding Year: "<<temp->foundingYear<<endl;
+		temp = temp->nextUniversity;
+		cout<<endl;
+	}	
+}
+
+void displayBranchDB()
+{
+	Branch* temp = new Branch();
+	temp = branch_head;
+	cout<<endl;
+	cout<<"All University Listed in DB are as follows:  "<<endl;
+	cout<<endl;
+
+	while(temp!=NULL)
+	{
+		cout<<"Branch ID: "<<temp->branchID<<endl;
+		cout<<"Branch Name: "<<temp->branchName<<endl;
+		cout<<"Associated University's ID: "<<temp->univID<<endl;
+		temp = temp->nextBranch;
+		cout<<endl;
+	}
+}
+
+// Main Function
+
 int main() {
 // #ifndef ONLINE_JUDGE
 // 	freopen("input.txt", "r", stdin);
@@ -112,7 +247,7 @@ int main() {
 
 while(true) 
 {
-	cout<<"Wlcm to Student Record management!!!\nEnter 1 to create a new Student Record\nEnter 2 to create a new University Record\nEnter 3 to create a new Branch Record\n";
+	cout<<"Wlcm to Student Record management!!!\nEnter 1 to create a new Student Record\nEnter 2 to create a new University Record\nEnter 3 to create a new Branch Record\nEnter 4 to Display the whole Student DB\nEnter 5 to Display the whole University DB\nEnter 6 to Display the whole Branch DB\n";
 	cout<<"Enter Your Choice"<<endl;
 	int choice;
 
@@ -136,9 +271,19 @@ while(true)
 
 		cout<<"Enter Branch ID of Student: "<<endl;
 		int bid_stu; cin>>bid_stu;
+		if(isBranchIDAvailable(bid_stu) == false)
+		{
+			cout<<"No Branch Exists with the Given Branch ID"<<endl;
+			break;
+		}
 
 		cout<<"Enter University ID of Student: "<<endl;
 		int uid_stu; cin>>uid_stu;
+		if(isUnivIDAvailable(uid_stu)==false)
+		{
+			cout<<"No University Exists with the Given University's ID"<<endl;
+			break;
+		}
 		insertStudent(roll_num, name_stu, cgpa_stu, bid_stu, uid_stu);
 		cout<<"Student Record Created!!"<<endl;
 	}
@@ -149,6 +294,11 @@ while(true)
 
 		cout<<"Enter University's ID: "<<endl;
 		int uid; cin>>uid;
+		if(isUniqueUniv(uid)==false)
+		{
+			cout<<"An Record with the given University ID Already Exists"<<endl;
+			break;
+		}
 
 		cout<<"Enter University's Location: "<<endl;
 		string loc; cin>>loc;
@@ -162,6 +312,11 @@ while(true)
 	{
 		cout<<"Enter Branch ID: ";
 		int bid; cin>>bid;
+		if(isUniqueBranch(bid)==false)
+		{
+			cout<<"An Record with the given Branch ID already exists"<<endl;
+			break;
+		}
 
 		cout<<"Enter Branch Name: ";
 		string bname; cin>>bname;
@@ -172,6 +327,18 @@ while(true)
 		insertBranch(bid, bname, uid);
 		cout<<"Branch Record Created!!"<<endl;
 	}
+	else if(choice==4)
+	{
+		displayStudentDB();
+	}
+	else if(choice==5)
+	{
+		displayUniversityDB();
+	}
+	else if(choice==6)
+	{
+		displayBranchDB();
+	}
 }
-return 0;
+	return 0;
 }
