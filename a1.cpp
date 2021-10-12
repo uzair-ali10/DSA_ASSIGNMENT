@@ -1,4 +1,6 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <string>
+ 
 using namespace std;
 
 // Classes below
@@ -237,6 +239,27 @@ void displayBranchDB()
 	}
 }
 
+void display_studentAtKiit(){
+    Student *temp1=stu_head;
+    University *temp2=univ_head;
+    
+    while(temp2!=NULL){
+        if(temp2->univName=="KIIT University"){
+            break;
+        }
+        temp2=temp2->nextUniversity;
+    }
+    
+    
+cout<<"List of students reading in KIIT University are "<<endl;
+    while(temp1!=NULL){
+        if(temp1->univID==temp2->univID){
+            cout<<temp1->name<<endl;
+        }
+        temp1=temp1->nextStudent;
+    }
+}
+
 // Main Function
 
 int main() {
@@ -247,7 +270,7 @@ int main() {
 
 while(true) 
 {
-	cout<<"Wlcm to Student Record management!!!\nEnter 1 to create a new Student Record\nEnter 2 to create a new University Record\nEnter 3 to create a new Branch Record\nEnter 4 to Display the whole Student DB\nEnter 5 to Display the whole University DB\nEnter 6 to Display the whole Branch DB\n";
+	cout<<"Wlcm to Student Record management!!!\nEnter 1 to create a new Student Record\nEnter 2 to create a new University Record\nEnter 3 to create a new Branch Record\nEnter 4 to Display the whole Student DB\nEnter 5 to Display the whole University DB\nEnter 6 to Display the whole Branch DB\nEnter 7 to Display the student list reading at KIIT University\n";
 	cout<<"Enter Your Choice"<<endl;
 	int choice;
 
@@ -338,6 +361,10 @@ while(true)
 	else if(choice==6)
 	{
 		displayBranchDB();
+	}
+    else if(choice==7)
+	{
+		display_studentAtKiit();
 	}
 }
 	return 0;
