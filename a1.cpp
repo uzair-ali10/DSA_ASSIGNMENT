@@ -314,24 +314,39 @@ void displayBranches()
 
 // Function to change all inputs to capital
 
-void convertStudent(string &name) { 
-    for (int i = 0; i < name.length(); i++) {
-        name[i] = toupper(name[i]);
+void convertStudent() {
+    Student* temp = new Student();
+    temp = stu_head;
+    while (temp != NULL) {
+    	for (int i = 0; i < (temp->name).length(); i++) {
+        (temp->name)[i] = toupper((temp->name)[i]);
+      }
+      temp = temp->nextStudent;
     }
 }
 
-void convertUniversity(string &uname, string &uloc) {
-    for (int i = 0; i < uname.length(); i++){
-        uname[i] = toupper(uname[i]);
+void convertUniversity() {
+    University* temp = new University();
+    temp = univ_head;
+    while (temp != NULL) {
+    	for (int i = 0; i < (temp->univName).length(); i++){
+        (temp->univName)[i] = toupper((temp->univName)[i]);
     }
-    for (int i = 0; i < uloc.length(); i++) {
-        uloc[i] = toupper(uloc[i]);
+        for (int i = 0; i < (temp->univLocation).length(); i++) {
+        (temp->univLocation)[i] = toupper((temp->univLocation)[i]);
+      }
+      temp = temp->nextUniversity;
     }
 }
 
-void convertBranch(string &bname) {
-    for (int i = 0; i < bname.length(); i++) {
-        bname[i] = toupper(bname[i]);
+void convertBranch() {
+    Branch* temp = new Branch();
+    temp = branch_head;
+    while (temp != NULL) {
+    	for (int i = 0; i < (temp->branchName).length(); i++) {
+        (temp->branchName)[i] = toupper((temp->branchName)[i]);
+      }
+      temp = temp->nextBranch;
     }
 }
 
@@ -383,7 +398,6 @@ while(true)
 			break;
 		}
 		insertStudent(roll_num, name_stu, cgpa_stu, bid_stu, uid_stu);
-		convertStudent(name_stu);
 		cout<<"Student Record Created!!"<<endl;
 	}
 	else if(choice==2)
@@ -405,7 +419,6 @@ while(true)
 		cout<<"Enter University's Founding Year: "<<endl;
 		int yr; cin>>yr;
 		insertUniversity(uid, uname, loc, yr);
-		convertUniversity(uname, loc);
 		cout<<"University Record Created!!"<<endl;
 	}
 	else if(choice==3)
@@ -425,19 +438,21 @@ while(true)
 		int uid; cin>>uid;
 
 		insertBranch(bid, bname, uid);
-		convertBranch(bname);
 		cout<<"Branch Record Created!!"<<endl;
 	}
 	else if(choice==4)
 	{
+		convertStudent();
 		displayStudentDB();
 	}
 	else if(choice==5)
 	{
+		convertUniversity();
 		displayUniversityDB();
 	}
 	else if(choice==6)
 	{
+		convertBranch();
 		displayBranchDB();
 	}
     else if(choice==7)
