@@ -288,6 +288,30 @@ void diplay_KiitStudentCse(){
     }
 }
 
+
+// Function to change all inputs to capital
+
+void convertStudent(string &name) { 
+    for (int i = 0; i < name.length(); i++) {
+        name[i] = toupper(name[i]);
+    }
+}
+
+void convertUniversity(string &uname, string &uloc) {
+    for (int i = 0; i < uname.length; i++){
+        uname[i] = toupper(uname[i]);
+    }
+    for (int i = 0; i < uloc.length; i++) {
+        uloc[i] = toupper(uloc[i]);
+    }
+}
+
+void convertBranch(string &bname) {
+    for (int i = 0; i < bname.length; i++) {
+        bname[i] = toupper(bname[i]);
+    }
+}
+
 // Main Function
 
 int main() {
@@ -336,6 +360,7 @@ while(true)
 			break;
 		}
 		insertStudent(roll_num, name_stu, cgpa_stu, bid_stu, uid_stu);
+		convertStudent(name_stu);
 		cout<<"Student Record Created!!"<<endl;
 	}
 	else if(choice==2)
@@ -357,6 +382,7 @@ while(true)
 		cout<<"Enter University's Founding Year: "<<endl;
 		int yr; cin>>yr;
 		insertUniversity(uid, uname, loc, yr);
+		convertUniversity(uname, loc);
 		cout<<"University Record Created!!"<<endl;
 	}
 	else if(choice==3)
@@ -376,6 +402,7 @@ while(true)
 		int uid; cin>>uid;
 
 		insertBranch(bid, bname, uid);
+		convertBranch(bname);
 		cout<<"Branch Record Created!!"<<endl;
 	}
 	else if(choice==4)
