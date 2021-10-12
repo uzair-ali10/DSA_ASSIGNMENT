@@ -298,16 +298,16 @@ void convertStudent(string &name) {
 }
 
 void convertUniversity(string &uname, string &uloc) {
-    for (int i = 0; i < uname.length; i++){
+    for (int i = 0; i < uname.length(); i++){
         uname[i] = toupper(uname[i]);
     }
-    for (int i = 0; i < uloc.length; i++) {
+    for (int i = 0; i < uloc.length(); i++) {
         uloc[i] = toupper(uloc[i]);
     }
 }
 
 void convertBranch(string &bname) {
-    for (int i = 0; i < bname.length; i++) {
+    for (int i = 0; i < bname.length(); i++) {
         bname[i] = toupper(bname[i]);
     }
 }
