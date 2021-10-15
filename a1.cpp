@@ -136,6 +136,31 @@ void updateStudent()
 	return;
 }
 
+void delete_student(){
+    int roll;
+    cout<<"Enter the roll no. to be deleted"<<endl;
+    cin>>roll;
+    
+    Student *temp=stu_head;
+    Student *prev=NULL;
+    
+    if(temp!=NULL && temp->rollNO==roll){
+        stu_head=temp->nextStudent;
+        delete temp;
+        cout<<"deleted"<<endl;        
+    }
+    while (temp != NULL && temp->rollNO != roll)
+    {
+        prev = temp;
+        temp = temp->nextStudent;
+    }   
+    if (temp == NULL)
+        return;     
+prev->nextStudent=temp->nextStudent;  
+    delete temp;
+    cout<<"deleted"<<endl;
+    }
+
 void updateBranch()
 {
 	int in_bid;
@@ -168,6 +193,31 @@ void updateBranch()
 	return;
 }
 
+void delete_branch(){
+    int branch_id;
+    cout<<"Enter the branch ID to be deleted"<<endl;
+    cin>>branch_id;
+    
+    Branch *temp=branch_head;
+    Branch *prev=NULL;
+    
+    if(temp!=NULL && temp->branchID==branch_id){
+        branch_head=temp->nextBranch;
+        delete temp;
+        cout<<"deleted"<<endl;        
+    }
+    while (temp != NULL && temp->branchID != branch_id)
+    {
+        prev = temp;
+        temp = temp->nextBranch;
+    }   
+    if (temp == NULL)
+        return;     
+prev->nextBranch=temp->nextBranch;  
+    delete temp;
+    cout<<"deleted"<<endl;
+    }
+    
 void updateUniv()
 {
 	int new_uid;
@@ -204,6 +254,31 @@ void updateUniv()
 	cout<<"No Such University found!!"<<endl;
 	return;
 }
+
+void delete_university(){
+    int university_id;
+    cout<<"Enter the University ID to be deleted"<<endl;
+    cin>>university_id;
+    
+    University *temp=univ_head;
+    University *prev=NULL;
+    
+    if(temp!=NULL && temp->univID==university_id){
+        univ_head=temp->nextUniversity;
+        delete temp;
+        cout<<"deleted"<<endl;        
+    }
+    while (temp != NULL && temp->univID != university_id)
+    {
+        prev = temp;
+        temp = temp->nextUniversity;
+    }   
+    if (temp == NULL)
+        return;     
+prev->nextUniversity=temp->nextUniversity;  
+    delete temp;
+    cout<<"deleted"<<endl;
+    }
 
 // Function To Check Uniqueness of IDs Below
 
@@ -513,7 +588,7 @@ int main() {
 
 while(true) 
 {
-	cout<<"Wlcm to Student Record management!!!\nEnter 1 to create a new Student Record\nEnter 2 to create a new University Record\nEnter 3 to create a new Branch Record\nEnter 4 to Display the whole Student DB\nEnter 5 to Display the whole University DB\nEnter 6 to Display the whole Branch DB\nEnter 7 to Display the student list reading at KIIT University\nEnter 8 to Display the student list reading at KIIT University with CSE branch\nEnter 9 to Display all the branches in a University\nEnter 10 to Update an Existing Student Record\nEnter 11 to Update an Existing Branch Record\nEnter 12 to update an existing University Record\nEnter 13 to  Display the all Student name/ all University name for a given name substring\n";
+	cout<<"Wlcm to Student Record management!!!\nEnter 1 to create a new Student Record\nEnter 2 to create a new University Record\nEnter 3 to create a new Branch Record\nEnter 4 to Display the whole Student DB\nEnter 5 to Display the whole University DB\nEnter 6 to Display the whole Branch DB\nEnter 7 to Display the student list reading at KIIT University\nEnter 8 to Display the student list reading at KIIT University with CSE branch\nEnter 9 to Display all the branches in a University\nEnter 10 to Update an Existing Student Record\nEnter 11 to Update an Existing Branch Record\nEnter 12 to update an existing University Record\nEnter 13 to  Display the all Student name/ all University name for a given name substring\nEnter 14 to delete specific student list\nEnter 15 to delete specific branch list\nEnter 16 to delete specific university list\n";
 	cout<<"Enter Your Choice"<<endl;
 	int choice;
 
@@ -635,6 +710,18 @@ while(true)
 	else if(choice==13)
 	{
 		display_substring();
+	}
+	else if(choice==14)
+	{
+		delete_student();        
+	}
+    else if(choice==15)
+	{
+		delete_branch();        
+	}
+    else if(choice==16)
+	{
+		delete_university();        
 	}
 }
 	return 0;
