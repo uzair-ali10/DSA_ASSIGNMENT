@@ -43,6 +43,7 @@ void insertStudent(int roll, string name, int cgpa, int branchID, int university
 	t->name = name;
 	t->branchID = branchID;
 	t->univID = universityID;
+	t->CGPA = cgpa;
 
 	if(stu_head==NULL)
 	{
@@ -62,7 +63,6 @@ void insertUniversity(int uid, string uname, string uloc, int yr)
 	t -> univName = uname;
 	t -> univLocation = uloc;
 	t -> foundingYear = yr;
-
 	if(univ_head==NULL)
 	{
 		univ_head = t;
@@ -379,7 +379,7 @@ void displayStudentDB()
 	while(temp!=NULL)
 	{
 		cout<<"Name: "<<temp->name<<endl;
-		cout<<"Roll No: "<<temp->name<<endl;
+		cout<<"Roll No: "<<temp->rollNO<<endl;
 		cout<<"CGPA: "<<temp->CGPA<<endl;
 		cout<<"Branch ID: "<<temp->branchID<<endl;
 		cout<<"University ID: "<<temp->univID<<endl;
