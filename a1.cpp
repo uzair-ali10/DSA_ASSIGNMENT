@@ -95,65 +95,6 @@ void insertBranch(int bid, string bname, int uid)
 	}
 }
 
-// Functions to Update Records
-
-void updateStudent()
-{
-	int in_roll;
-	cout << "Enter Rool No of the Student whose data is to be modified: " << endl;
-	cin >> in_roll;
-
-	Student *temp = new Student();
-	temp = stu_head;
-	Student *temp2 = NULL;
-	while (temp != NULL)
-	{
-		if (temp->rollNO == in_roll)
-		{
-			int new_cgpa;
-			cout << "Enter New CGPA: " << endl;
-			cin >> new_cgpa;
-			if (new_cgpa > 6.0)
-			{
-				Student *temp1 = new Student();
-				temp1 = stu_head1;
-				while (temp1 != NULL)
-				{
-					if (temp->rollNO == temp1->rollNO)
-					{
-						temp2 = temp1;
-					}
-				}
-			}
-
-			temp->nextStudent = temp2;
-			int new_bid;
-			cout << "Enter New Branch ID: " << endl;
-			cin >> new_bid;
-
-			string new_name;
-			cout << "Enter new Name: " << endl;
-			cin >> new_name;
-
-			int new_univid;
-			cout << "Enter new University ID: " << endl;
-			cin >> new_univid;
-
-			temp->name = new_name;
-			temp->CGPA = new_cgpa;
-			temp->branchID = new_bid;
-			temp->univID = new_univid;
-
-			return;
-		}
-
-		temp = temp->nextStudent;
-	}
-
-	cout << "No Such Student found!!" << endl;
-	return;
-}
-
 void delete_student()
 {
 	int roll;
@@ -236,6 +177,132 @@ void delete_update()
 	{
 		return;
 	}
+}
+
+// Functions to Update Records
+void updateStudent()
+{
+	int in_roll;
+	cout << "Enter Roll No of the Student whose data is to be modified: " << endl;
+	cin >> in_roll;
+	int new_cgpa;
+	cout << "Enter New CGPA: " << endl;
+	cin >> new_cgpa;
+	int new_bid;
+	cout << "Enter New Branch ID: " << endl;
+	cin >> new_bid;
+	string new_name;
+	cout << "Enter new Name: " << endl;
+	cin >> new_name;
+	int new_univid;
+	cout << "Enter new University ID: " << endl;
+	cin >> new_univid;
+	Student *temp = new Student();
+	temp = stu_head;
+	Student *temp1 = new Student();
+	temp1 = stu_head1;
+	Student *temp2 = NULL;
+	Student *prev = NULL;
+	int flag = 0;
+	while (temp != NULL)
+	{
+		if (temp->rollNO == in_roll)
+		{
+			Student *t = new Student();
+			t->rollNO = in_roll;
+			t->name = new_name;
+			t->CGPA = new_cgpa;
+			t->branchID = new_bid;
+			t->univID = new_univid;
+			if (new_cgpa < 6.0)
+			{
+				if (stu_head1 == NULL)
+				{
+					stu_head1 = t;
+				}
+				else
+				{
+					t->nextStudent = stu_head1;
+					stu_head1 = t;
+				}
+
+				if (temp == stu_head)
+				{
+					stu_head = stu_head->nextStudent;
+					delete temp;
+					temp = stu_head;
+					cout << "deleted" << endl;
+				}
+				else
+				{
+					prev->nextStudent = temp->nextStudent;
+					delete temp;
+					temp = temp->nextStudent;
+
+				}
+			}
+
+			flag = 1;
+		}
+		else
+		{
+			prev = temp;
+			temp = temp->nextStudent;
+		}
+	}
+
+	if (temp == NULL && flag == 0)
+	{
+		temp1 = stu_head1;
+		while (temp1 != NULL)
+		{
+			if (temp1->rollNO == in_roll)
+			{
+				Student *t = new Student();
+				t->rollNO = in_roll;
+				t->name = new_name;
+				t->CGPA = new_cgpa;
+				t->branchID = new_bid;
+				t->univID = new_univid;
+				if (stu_head == NULL)
+				{
+					stu_head = t;
+				}
+				else
+				{
+					t->nextStudent = stu_head;
+					stu_head = t;
+				}
+
+				if (temp1 == stu_head1)
+				{
+					stu_head1 = stu_head1->nextStudent;
+					delete temp1;
+					temp1 = stu_head1;
+					cout << "deleted" << endl;
+				}
+				else
+				{
+					prev->nextStudent = temp1->nextStudent;
+					delete temp1;
+					temp1 = temp1->nextStudent;
+
+				}
+			}
+			else
+			{
+				prev = temp1;
+				temp1 = temp1->nextStudent;
+			}
+		}
+	}
+	else if (temp1 == NULL)
+	{
+		return;
+	}
+
+	cout << "No Such Student found!!" << endl;
+
 }
 
 void updateBranch()
